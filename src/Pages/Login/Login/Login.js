@@ -1,7 +1,17 @@
-import React from "react";
+import React, { useRef } from "react";
 import { Link } from "react-router-dom";
 
 const Login = () => {
+  const emailRef = useRef("");
+  const passwordRef = useRef("");
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const email = emailRef.current.value;
+    const password = passwordRef.current.value;
+    console.log(email, password);
+  };
+
   return (
     <>
       <div className="min-w-screen min-h-screen flex items-center justify-center px-5 py-5">
@@ -10,13 +20,13 @@ const Login = () => {
           style={{ maxWidth: "1000px" }}
         >
           <div className="md:flex w-full">
-            <div class="hidden md:block w-1/2 bg-teal-500 py-10 px-10">
+            <div className="hidden md:block w-1/2 bg-teal-500 py-10 px-10">
               <svg
                 id="a87032b8-5b37-4b7e-a4d9-4dbfbe394641"
                 data-name="Layer 1"
                 xmlns="http://www.w3.org/2000/svg"
                 width="100%"
-                height="auto"
+                height="100%"
                 viewBox="0 0 744.84799 747.07702"
               >
                 <path
@@ -220,10 +230,10 @@ const Login = () => {
                 <h1 className="font-bold text-3xl text-gray-900">
                   PLEASE LOGIN
                 </h1>
-                <p>Enter your information to lOGIN</p>
+                <p>Enter your information to Login</p>
               </div>
-              <div>
-                <div className="flex -mx-3">
+              <form onSubmit={handleSubmit}>
+                <div className="flex mx-3">
                   <div className="w-full px-3 mb-3">
                     <label htmlFor="" className="text-xs font-semibold px-1">
                       Email
@@ -233,15 +243,17 @@ const Login = () => {
                         <i className="mdi mdi-email-outline text-gray-400 text-lg"></i>
                       </div>
                       <input
+                        ref={emailRef}
                         type="email"
-                        className="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-teal-500"
+                        className="w-full -ml-10 pl-5 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-teal-500"
                         placeholder="Enter Your Email Here"
+                        required
                       />
                     </div>
                   </div>
                 </div>
-                <div className="flex -mx-3">
-                  <div className="w-full px-3 mb-3">
+                <div className="flex mx-3">
+                  <div className="w-full px-3 mb-4">
                     <label htmlFor="" className="text-xs font-semibold px-1">
                       Password
                     </label>
@@ -250,47 +262,52 @@ const Login = () => {
                         <i className="mdi mdi-lock-outline text-gray-400 text-lg"></i>
                       </div>
                       <input
+                        ref={passwordRef}
                         type="password"
-                        className="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-teal-500"
+                        className="w-full -ml-10 pl-5 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-teal-500"
                         placeholder="Enter Your Password"
+                        required
                       />
                     </div>
                   </div>
                 </div>
-                <div className="flex -mx-3">
-                  <div className="w-full px-3 mb-5">
-                    <label htmlFor="" className="text-xs font-semibold px-1">
-                      Confirm Password
-                    </label>
-                    <div className="flex">
-                      <div className="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center">
-                        <i className="mdi mdi-lock-outline text-gray-400 text-lg"></i>
-                      </div>
-                      <input
-                        type="password"
-                        className="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-teal-500"
-                        placeholder="Confirm Your Password"
-                      />
-                    </div>
-                  </div>
+                <div className="w-full mb-1 mt-2">
+                  <button
+                    type="submit"
+                    className="block w-full max-w-xs mx-auto bg-teal-500 hover:bg-teal-700 focus:bg-teal-700 text-white rounded-lg px-3 py-2 font-semibold"
+                  >
+                    LOGIN
+                  </button>
                 </div>
-                <div className="flex -mx-3">
-                  <div className="w-full px-3 mb-3">
-                    <button className="block w-full max-w-xs mx-auto bg-teal-500 hover:bg-teal-700 focus:bg-teal-700 text-white rounded-lg px-3 py-3 font-semibold">
-                      LOGIN
-                    </button>
-                  </div>
+              </form>
+              <div>
+                <div className="toggle-link flex items-center justify-center">
+                  <div className="border w-full"></div>
+                  <div className="m-3 text-base">Or</div>
+                  <div className="border w-full"></div>
                 </div>
-                <div className="text-center">
-                  <p>
-                    <small>
-                      Don't Have An Account?
-                      <Link className="no-underline ml-2" to="/register">
-                        Register
-                      </Link>
-                    </small>
-                  </p>
-                </div>
+                <button
+                  // onClick={() => signInWithGoogle()}
+                  className="group relative font-sans w-full flex justify-center items-center py-2 px-4 shadow-md border text-sm font-normal
+                  bg-white text-black rounded-md hover:shadow-inner focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                >
+                  <img
+                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRoAbZUfVUgAB3F7PrFvnrseBXmYJ2goO2-jGeIBH5sqD8nD_ZyCC8MAI1jzQo3ZnnCQrE&usqp=CAU"
+                    className="w-1/12 mr-2"
+                    alt=""
+                  />
+                  Continue With Google
+                </button>
+              </div>
+              <div className="text-center mt-3">
+                <p>
+                  <small>
+                    Don't Have An Account?
+                    <Link className="no-underline ml-2" to="/register">
+                      Register
+                    </Link>
+                  </small>
+                </p>
               </div>
             </div>
           </div>

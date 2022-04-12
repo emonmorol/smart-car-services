@@ -2,6 +2,18 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const Register = () => {
+  const handleRegister = (event) => {
+    event.preventDefault();
+    console.log(event.target.email.value);
+    const firstName = event.target.firstName.value;
+    const lastName = event.target.lastName.value;
+    const name = firstName + " " + lastName;
+    const email = event.target.email.value;
+    const password = event.target.password.value;
+    const confirmPassword = event.target.confirmPassword.value;
+    console.log(name, email, password, confirmPassword);
+  };
+
   return (
     <>
       <div className="min-w-screen min-h-screen flex items-center justify-center px-5 py-5">
@@ -10,13 +22,13 @@ const Register = () => {
           style={{ maxWidth: "1000px" }}
         >
           <div className="md:flex w-full">
-            <div class="hidden md:block w-1/2 bg-teal-500 py-10 px-10">
+            <div className="hidden md:block w-1/2 bg-teal-500 py-10 px-10">
               <svg
                 id="a87032b8-5b37-4b7e-a4d9-4dbfbe394641"
                 data-name="Layer 1"
                 xmlns="http://www.w3.org/2000/svg"
                 width="100%"
-                height="auto"
+                height="100%"
                 viewBox="0 0 744.84799 747.07702"
               >
                 <path
@@ -67,7 +79,7 @@ const Register = () => {
                   cx="364.43401"
                   cy="261.50202"
                   r="24.45"
-                  fill="#6c63ff"
+                  fill="#0694a2"
                 />
                 <path
                   id="bbe451c3-febc-41ba-8083-4c8307a2e73e"
@@ -91,7 +103,7 @@ const Register = () => {
                   cx="225.46401"
                   cy="427.41999"
                   r="6.902"
-                  fill="#6c63ff"
+                  fill="#0694a2"
                 />
                 <rect
                   id="ff33d889-4c74-4b91-85ef-b4882cc8fe76"
@@ -108,12 +120,12 @@ const Register = () => {
                   cx="225.46401"
                   cy="496.43702"
                   r="6.902"
-                  fill="#6c63ff"
+                  fill="#0694a2"
                 />
                 <path
                   d="M660.69043,671.17188H591.62207a4.50493,4.50493,0,0,1-4.5-4.5v-24.208a4.50492,4.50492,0,0,1,4.5-4.5h69.06836a4.50491,4.50491,0,0,1,4.5,4.5v24.208A4.50492,4.50492,0,0,1,660.69043,671.17188Z"
                   transform="translate(-227.576 -76.46149)"
-                  fill="#6c63ff"
+                  fill="#0694a2"
                 />
                 <circle
                   id="e12ee00d-aa4a-4413-a013-11d20b7f97f7"
@@ -121,7 +133,7 @@ const Register = () => {
                   cx="247.97799"
                   cy="427.41999"
                   r="6.902"
-                  fill="#6c63ff"
+                  fill="#0694a2"
                 />
                 <circle
                   id="f58f497e-6949-45c8-be5f-eee2aa0f6586"
@@ -129,7 +141,7 @@ const Register = () => {
                   cx="270.492"
                   cy="427.41999"
                   r="6.902"
-                  fill="#6c63ff"
+                  fill="#0694a2"
                 />
                 <circle
                   id="b4d4939a-c6e6-4f4d-ba6c-e8b05485017d"
@@ -137,7 +149,7 @@ const Register = () => {
                   cx="247.97799"
                   cy="496.43702"
                   r="6.902"
-                  fill="#6c63ff"
+                  fill="#0694a2"
                 />
                 <circle
                   id="aff120b1-519b-4e96-ac87-836aa55663de"
@@ -145,7 +157,7 @@ const Register = () => {
                   cx="270.492"
                   cy="496.43702"
                   r="6.902"
-                  fill="#6c63ff"
+                  fill="#0694a2"
                 />
                 <path
                   id="f1094013-1297-477a-ac57-08eac07c4bd5"
@@ -220,7 +232,7 @@ const Register = () => {
                 <h1 className="font-bold text-3xl text-gray-900">REGISTER</h1>
                 <p>Enter your information to register</p>
               </div>
-              <div>
+              <form onSubmit={handleRegister}>
                 <div className="flex -mx-3">
                   <div className="w-1/2 px-3 mb-3">
                     <label htmlFor="" className="text-xs font-semibold px-1">
@@ -232,8 +244,10 @@ const Register = () => {
                       </div>
                       <input
                         type="text"
-                        className="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-teal-500"
+                        name="firstName"
+                        className="w-full -ml-10 pl-5 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-teal-500"
                         placeholder="John"
+                        required
                       />
                     </div>
                   </div>
@@ -247,8 +261,10 @@ const Register = () => {
                       </div>
                       <input
                         type="text"
-                        className="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-teal-500"
+                        name="lastName"
+                        className="w-full -ml-10 pl-5 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-teal-500"
                         placeholder="Smith"
+                        required
                       />
                     </div>
                   </div>
@@ -264,14 +280,16 @@ const Register = () => {
                       </div>
                       <input
                         type="email"
-                        className="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-teal-500"
-                        placeholder="johnsmith@example.com"
+                        name="email"
+                        className="w-full -ml-10 pl-5 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-teal-500"
+                        placeholder="Enter Your Email Here"
+                        required
                       />
                     </div>
                   </div>
                 </div>
                 <div className="flex -mx-3">
-                  <div className="w-full px-3 mb-5">
+                  <div className="w-full px-3 mb-3">
                     <label htmlFor="" className="text-xs font-semibold px-1">
                       Password
                     </label>
@@ -281,28 +299,71 @@ const Register = () => {
                       </div>
                       <input
                         type="password"
-                        className="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-teal-500"
+                        name="password"
+                        className="w-full -ml-10 pl-5 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-teal-500"
+                        placeholder="Enter Your Password Here"
+                        required
                       />
                     </div>
                   </div>
                 </div>
                 <div className="flex -mx-3">
-                  <div className="w-full px-3 mb-3">
-                    <button className="block w-full max-w-xs mx-auto bg-teal-500 hover:bg-teal-700 focus:bg-teal-700 text-white rounded-lg px-3 py-3 font-semibold">
+                  <div className="w-full px-3 mb-4">
+                    <label htmlFor="" className="text-xs font-semibold px-1">
+                      Confirm Password
+                    </label>
+                    <div className="flex">
+                      <div className="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center">
+                        <i className="mdi mdi-lock-outline text-gray-400 text-lg"></i>
+                      </div>
+                      <input
+                        type="password"
+                        name="confirmPassword"
+                        className="w-full -ml-10 pl-5 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-teal-500"
+                        placeholder="Confirm Your Password"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div className="flex -mx-3">
+                  <div className="w-full px-3 mb-1">
+                    <button
+                      type="submit"
+                      className="block w-full max-w-xs mx-auto bg-teal-500 hover:bg-teal-700 focus:bg-teal-700 text-white rounded-lg px-3 py-3 font-semibold"
+                    >
                       REGISTER NOW
                     </button>
                   </div>
                 </div>
-                <div className="text-center">
-                  <p>
-                    <small>
-                      Already Have An Account?
-                      <Link className="no-underline ml-2" to="/login">
-                        Login
-                      </Link>
-                    </small>
-                  </p>
+              </form>
+              <div>
+                <div className="toggle-link flex items-center justify-center">
+                  <div className="border w-full"></div>
+                  <div className="m-3 text-base">Or</div>
+                  <div className="border w-full"></div>
                 </div>
+                <button
+                  // onClick={() => signInWithGoogle()}
+                  className="group relative font-sans w-full flex justify-center items-center py-2 px-4 shadow-md border text-sm font-normal
+                  bg-white text-black rounded-md hover:shadow-inner focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                >
+                  <img
+                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRoAbZUfVUgAB3F7PrFvnrseBXmYJ2goO2-jGeIBH5sqD8nD_ZyCC8MAI1jzQo3ZnnCQrE&usqp=CAU"
+                    className="w-1/12 mr-2"
+                    alt=""
+                  />
+                  Continue With Google
+                </button>
+              </div>
+              <div className="text-center mt-3">
+                <p>
+                  <small>
+                    Already Have An Account?
+                    <Link className="no-underline ml-2" to="/login">
+                      Login
+                    </Link>
+                  </small>
+                </p>
               </div>
             </div>
           </div>
