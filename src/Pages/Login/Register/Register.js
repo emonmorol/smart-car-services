@@ -1,17 +1,18 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import auth from "../../../firebase.init";
+import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
 
 const Register = () => {
+  const [createUserWithEmailAndPassword, user, loading, error] =
+    useCreateUserWithEmailAndPassword(auth);
+  console.log(user);
+
   const handleRegister = (event) => {
     event.preventDefault();
-    console.log(event.target.email.value);
-    const firstName = event.target.firstName.value;
-    const lastName = event.target.lastName.value;
-    const name = firstName + " " + lastName;
     const email = event.target.email.value;
     const password = event.target.password.value;
-    const confirmPassword = event.target.confirmPassword.value;
-    console.log(name, email, password, confirmPassword);
+    createUserWithEmailAndPassword(email, password);
   };
 
   return (
@@ -307,6 +308,7 @@ const Register = () => {
                     </div>
                   </div>
                 </div>
+                {/* <div>{error && <p>{error.message}</p>}</div> */}
                 <div className="flex -mx-3">
                   <div className="w-full px-3 mb-4">
                     <label htmlFor="" className="text-xs font-semibold px-1">
