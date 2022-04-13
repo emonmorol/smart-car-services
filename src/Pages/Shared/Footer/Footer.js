@@ -4,7 +4,7 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <footer className="text-center">
+    <footer className="footer-content text-center">
       <p>
         <small>
           copyright reserved <FontAwesomeIcon icon={faCopyright} />{" "}
