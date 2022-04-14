@@ -5,13 +5,17 @@ import {
 } from "react-firebase-hooks/auth";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import auth from "../../../firebase.init";
+import Loading from "../../Shared/Loading/Loading";
 import SocialLinks from "../SocialLinks/SocialLinks";
 import "./Login.css";
+import { ToastContainer, toast } from "react-toastify";
+
+import "react-toastify/dist/ReactToastify.css";
 
 const Login = () => {
   const [signInWithEmailAndPassword, user, loading, error] =
     useSignInWithEmailAndPassword(auth);
-  const [sendPasswordResetEmail, sending] = useSendPasswordResetEmail(auth);
+  const [sendPasswordResetEmail] = useSendPasswordResetEmail(auth);
   const emailRef = useRef("");
   const passwordRef = useRef("");
   const location = useLocation();
@@ -19,6 +23,11 @@ const Login = () => {
   const from = location.state?.from?.pathname || "/";
 
   let errorElement;
+
+  if (loading) {
+    return <Loading />;
+  }
+
   if (error) {
     errorElement = (
       <p className="text-red-500 text-center text-sm">
@@ -32,8 +41,12 @@ const Login = () => {
 
   const handleResetPassword = async () => {
     const email = emailRef.current.value;
-    await sendPasswordResetEmail(email);
-    alert("Email Sent With Verification");
+    if (email) {
+      await sendPasswordResetEmail(email);
+      toast("Email Sent With Verification");
+    } else {
+      toast("Please Enter Your Email Address");
+    }
   };
 
   const handleSubmit = (event) => {
@@ -364,6 +377,7 @@ const Login = () => {
             </div>
           </div>
         </div>
+        <ToastContainer className="relative top-11" />
       </div>
     </>
   );

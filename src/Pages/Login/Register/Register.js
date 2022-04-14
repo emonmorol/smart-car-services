@@ -7,16 +7,27 @@ import {
   useUpdateProfile,
 } from "react-firebase-hooks/auth";
 import SocialLinks from "../SocialLinks/SocialLinks";
+import Loading from "../../Shared/Loading/Loading";
+import { toast, ToastContainer } from "react-toastify";
 
 const Register = () => {
-  const [createUserWithEmailAndPassword] =
-    useCreateUserWithEmailAndPassword(auth);
-  const [updateProfile] = useUpdateProfile(auth);
+  const [createUserWithEmailAndPassword, user, loading] =
+    useCreateUserWithEmailAndPassword(auth, { sendEmailVerification: true });
+  const [updateProfile, updating] = useUpdateProfile(auth);
 
   //states
   const [manualError, setManualError] = useState("");
+  const [agree, setAgree] = useState(false);
   // const [user] = useAuthState(auth);
   const navigate = useNavigate();
+
+  if (loading || updating) {
+    return <Loading />;
+  }
+
+  if (user) {
+    toast("User Created Successfully");
+  }
 
   const handleRegister = async (event) => {
     event.preventDefault();
@@ -26,15 +37,14 @@ const Register = () => {
     const email = event.target.email.value;
     const password = event.target.password.value;
     const confirmPassword = event.target.confirmPassword.value;
+    // const agree = event.target.terms.checked;
 
     if (password !== confirmPassword) {
       setManualError("Password Didn't Match!");
       return;
     }
-
     await createUserWithEmailAndPassword(email, password);
     await updateProfile({ displayName: name });
-
     navigate("/home");
   };
   return (
@@ -376,13 +386,14 @@ const Register = () => {
                 </div>
                 <div className="mb-3 flex items-center justify-center">
                   <input
-                    className="mr-2 border-gray-400 outline-1 focus:border-teal-500"
+                    onClick={() => setAgree(!agree)}
+                    className="mr-3 border-gray-400 outline-1 focus:border-teal-500"
                     type="checkbox"
                     name="terms"
                     id="terms"
                   />
                   <label
-                    // className="relative left-2"
+                    className={`pl-1 ${agree ? "text-blue-500" : ""}`}
                     htmlFor="terms"
                   >
                     Accept Our Terms And Conditions
@@ -391,6 +402,7 @@ const Register = () => {
                 <div className="flex -mx-3">
                   <div className="w-full px-3 mb-1">
                     <button
+                      disabled={!agree}
                       type="submit"
                       className="group relative font-sans w-full flex justify-center items-center py-2.5 px-4 shadow-md border text-sm font-medium
                   bg-teal-500 text-white rounded-full hover:shadow-inner focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500"
@@ -415,6 +427,7 @@ const Register = () => {
           </div>
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 };

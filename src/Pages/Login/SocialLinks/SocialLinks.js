@@ -1,6 +1,6 @@
 import React from "react";
 import {
-  useSignInWithFacebook,
+  // useSignInWithFacebook,
   useSignInWithGithub,
   useSignInWithGoogle,
 } from "react-firebase-hooks/auth";
@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import auth from "../../../firebase.init";
 import facebook from "../../../images/social/facebook.png";
 import github from "../../../images/social/github.png";
+import Loading from "../../Shared/Loading/Loading";
 
 const SocialLinks = () => {
   const [signInWithGoogle, user, loading, error] = useSignInWithGoogle(auth);
@@ -17,6 +18,10 @@ const SocialLinks = () => {
 
   const navigate = useNavigate();
   let errorElement;
+
+  if (loading || loading1) {
+    return <Loading />;
+  }
 
   if (error || error1) {
     errorElement = (
