@@ -19,9 +19,9 @@ const SocialLinks = () => {
   const navigate = useNavigate();
   let errorElement;
 
-  if (loading || loading1) {
-    return <Loading />;
-  }
+  // if (loading || loading1) {
+  //   return <Loading />;
+  // }
 
   if (error || error1) {
     errorElement = (
