@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   // useSignInWithFacebook,
   useSignInWithGithub,
   useSignInWithGoogle,
 } from "react-firebase-hooks/auth";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import auth from "../../../firebase.init";
 import facebook from "../../../images/social/facebook.png";
 import github from "../../../images/social/github.png";
@@ -16,12 +16,19 @@ const SocialLinks = () => {
   //     useSignInWithFacebook(auth);
   const [signInWithGithub, user1, loading1, error1] = useSignInWithGithub(auth);
 
+  const location = useLocation();
   const navigate = useNavigate();
   let errorElement;
 
-  // if (loading || loading1) {
-  //   return <Loading />;
-  // }
+  const from = location.state?.from?.pathname || "/home";
+  useEffect(() => {
+    if (user || user1) {
+      navigate(from, { replace: true });
+    }
+  }, []);
+  if (loading || loading1) {
+    return <Loading />;
+  }
 
   if (error || error1) {
     errorElement = (
@@ -30,9 +37,7 @@ const SocialLinks = () => {
       </p>
     );
   }
-  if (user || user1) {
-    navigate("/");
-  }
+
   return (
     <div>
       <div className="toggle-link flex items-center justify-center">

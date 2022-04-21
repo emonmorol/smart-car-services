@@ -3,7 +3,7 @@ import React from "react";
 const Loading = () => {
   return (
     <div>
-      <div className="w-full my-12 flex justify-center items-center">
+      <div className="w-full h-screen my-12 flex justify-center items-center">
         <button
           disabled
           type="button"
