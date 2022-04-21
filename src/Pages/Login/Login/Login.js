@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import {
   useSendPasswordResetEmail,
   useSignInWithEmailAndPassword,
@@ -11,6 +11,7 @@ import "./Login.css";
 import { ToastContainer, toast } from "react-toastify";
 
 import "react-toastify/dist/ReactToastify.css";
+import PageTitle from "../../Shared/PageTitle/PageTitle";
 
 const Login = () => {
   const [signInWithEmailAndPassword, user, loading, error] =
@@ -20,10 +21,15 @@ const Login = () => {
   const passwordRef = useRef("");
   const location = useLocation();
   const navigate = useNavigate();
-  const from = location.state?.from?.pathname || "/";
 
   let errorElement;
 
+  const from = location.state?.from?.pathname || "/home";
+  useEffect(() => {
+    if (user) {
+      navigate(from, { replace: true });
+    }
+  }, []);
   if (loading) {
     return <Loading />;
   }
@@ -34,9 +40,6 @@ const Login = () => {
         Error: {error?.message}
       </p>
     );
-  }
-  if (user) {
-    navigate(from, { replace: true });
   }
 
   const handleResetPassword = async () => {
@@ -58,6 +61,7 @@ const Login = () => {
 
   return (
     <>
+      <PageTitle title="Login" />
       <div className="min-w-screen min-h-screen flex items-center justify-center px-5 py-5">
         <div className="custom-shape-divider-bottom-1649857276">
           <svg

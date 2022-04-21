@@ -10,8 +10,8 @@ const Service = ({ service }) => {
     navigate(`/service/${id}`);
   };
   return (
-    <div className="single-service m-5 overflow-hidden rounded-lg bg-white shadow-lg">
-      <div className="p-3">
+    <div className="single-service m-3 lg:m-5 overflow-hidden rounded-lg">
+      <div className="p-1">
         <img className="rounded-lg mx-auto w-full" src={img} alt="" />
         <div className="my-3 ml-2">
           <h1 className="text-2xl font-bold text-gray-700 mb-3 mt-1">{name}</h1>

@@ -1,4 +1,21 @@
+.single-expert {
+  display: flex;
+  justify-self: center;
+  align-items: center;
+  border-radius: 20px;
+  margin-bottom: 20px;
+  margin-right: 20px;
+  background: #f4fbfb;
+  box-shadow: 5px 5px 10px #acacac, -5px -5px 10px #ffffff;
+}
+.single-expert img {
+  border-radius: 20px;
+}
 .single-expert:hover {
   transform: scale(1.02);
   transition: transform 0.4s ease;
+}
+.single-expert div {
+  /* box-shadow: 5px 5px 10px #acacac, -5px -5px 10px #ffffff; */
+  border-radius: 20px;
 }
