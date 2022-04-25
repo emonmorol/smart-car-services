@@ -55,6 +55,12 @@ const Header = () => {
                 <Nav.Link as={Link} to="/manage">
                   Manage Service
                 </Nav.Link>
+                <Nav.Link as={Link} to="/orders">
+                  Orders
+                </Nav.Link>
+                <Nav.Link as={Link} to="/user-profile">
+                  {user?.displayName ? user.displayName : "User"}
+                </Nav.Link>
               </>
             )}
             {user ? (
@@ -64,11 +70,6 @@ const Header = () => {
             ) : (
               <Nav.Link as={Link} to="/login">
                 Login
-              </Nav.Link>
-            )}
-            {user && (
-              <Nav.Link as={Link} to="/user-profile">
-                {user?.displayName ? user.displayName : "User"}
               </Nav.Link>
             )}
           </Nav>

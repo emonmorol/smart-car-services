@@ -4,7 +4,7 @@ import Service from "../Service/Service";
 
 const Services = () => {
   const [allServices] = useServices();
-  console.log(allServices);
+  // console.log(allServices);
 
   return (
     <div id="services">

@@ -1,5 +1,4 @@
 import React from "react";
-import { ToastContainer } from "react-bootstrap";
 import {
   useAuthState,
   useSendEmailVerification,
@@ -17,7 +16,7 @@ const RequireAuth = ({ children }) => {
     return <Loading />;
   }
   if (!user) {
-    return <Navigate to="/login" state={{ from: location }} replace />;
+    return <Navigate to="/login" state={{ from: location }} />;
   }
   if (
     user?.providerData[0]?.providerId === "password" &&
@@ -36,7 +35,6 @@ const RequireAuth = ({ children }) => {
         >
           Sent Verification Email
         </button>
-        <ToastContainer />
       </div>
     );
   }

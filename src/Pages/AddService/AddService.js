@@ -1,6 +1,5 @@
 import { stringify } from "@firebase/util";
 import React from "react";
-import { ToastContainer } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 
@@ -12,7 +11,7 @@ const AddService = () => {
     formState: { errors },
   } = useForm();
   const onSubmit = (service) => {
-    console.log(service);
+    // console.log(service);
     const url = `http://localhost:5000/service`;
     fetch(url, {
       method: "POST",
@@ -61,7 +60,6 @@ const AddService = () => {
           value="Add Service"
         />
       </form>
-      <ToastContainer />
     </div>
   );
 };

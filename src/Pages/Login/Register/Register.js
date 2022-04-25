@@ -8,7 +8,7 @@ import {
 } from "react-firebase-hooks/auth";
 import SocialLinks from "../SocialLinks/SocialLinks";
 import Loading from "../../Shared/Loading/Loading";
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 
 const Register = () => {
   const [createUserWithEmailAndPassword, user, loading] =
@@ -427,7 +427,6 @@ const Register = () => {
           </div>
         </div>
       </div>
-      <ToastContainer />
     </div>
   );
 };
